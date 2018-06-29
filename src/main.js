@@ -21,8 +21,7 @@ import OrderingGuide from './components/about/OrderingGuide'
 import phone from './components/about/contact/phone'
 import name from './components/about/contact/name'
 
-
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {path:'/',name:"homeLink",component:Home},
@@ -40,11 +39,11 @@ const routes = [
   {path:'/login',name:"loginLink",component:Login},
   {path:'/register',name:"registerLink",component:Register},
   {path:'*',redirect:'/'}
-]
+];
 const router = new VueRouter({
   routes,
   mode:"history"
-})
+});
 
 // 全局守卫
 
@@ -59,4 +58,4 @@ new Vue({
   el: '#app',
   router,
   render: h => h(App)
-})
+});
