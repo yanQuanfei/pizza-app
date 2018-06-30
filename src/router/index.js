@@ -22,7 +22,12 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path:'/',name:"homeLink",component:Home},
+    {path:'/',name:"homeLink",components:{
+      default:Home,
+      'orderingGuide':OrderingGuide,
+      'delivery':Delivery,
+      'history':History
+    }},
     {path:'/menu',name:"menuLink",component:Menu},
     {path:'/admin',name:"adminLink",component:Admin},
     {path:'/about',name:"aboutLink",component:About,redirect:'/history', children:[
@@ -39,4 +44,18 @@ export default new Router({
     {path:'*',redirect:'/'}
   ],
   mode:'history'
+  // ,
+  // scrollBehavior(to,from,savedPosition)
+  // {
+  //   //return{x:0,y:100}
+  //   // return{selector:'.btn'}
+  //   if(savedPosition)
+  //   {
+  //     return savedPosition
+  //   }
+  //   else
+  //   {
+  //     return {x:0,y:0}
+  //   }
+  // }
 })

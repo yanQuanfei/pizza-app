@@ -1,8 +1,15 @@
 <template>
-<div>
-    <h1>Home</h1>
+<div class="row">
+<div id="home" class="col-sm-12 text-center">
 
-    <button class="btn btn-success" @click="goToMenu">去菜单</button>
+    <div class="background">
+        <h1>欢迎大家品尝 Pizza！</h1>
+        <h2>这里有你喜欢的 Pizza</h2>
+
+        <button class="btn btn-success" @click="goToMenu">去菜单</button>
+    </div>
+</div>
+
 </div>
 
 </template>
@@ -28,5 +35,21 @@
 </script>
 
 <style scoped>
+#home{
+    background: url('../../src/assets/pizza.jpg');
+    height: 80vh;
+    padding: 10%;
+
+}
+h1,h2{
+    margin: 6%;
+}
+.background{
+    background: #eee;
+    opacity: 0.8;
+    max-width: 70vw;
+    margin: 0 auto;
+    padding: 20xp 0;
+}
 
 </style>
