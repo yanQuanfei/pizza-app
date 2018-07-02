@@ -37,7 +37,7 @@
 <style scoped>
 #home{
     background: url('../../src/assets/pizza.jpg');
-    height: 80vh;
+    height: 60vh;
     padding: 10%;
 
 }
