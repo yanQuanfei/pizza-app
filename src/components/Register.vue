@@ -51,9 +51,9 @@ import axios from 'axios'
                         confirmPassword:this.confirmPassword
                     }
                     
-                    axios.post('/users.json',FormData).then(res =>{
-                        console.log(res)
-                    })
+                    // axios.post('/users.json',FormData).then(res =>{
+                    //     console.log(res)
+                    // })
                 }
                 else
                 {

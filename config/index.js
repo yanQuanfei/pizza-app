@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/': {
+      '/api': {
         target: 'https://wd9708593430bydcmi.wilddogio.com/', //设置调用接口域名和端口号别忘了加http
         changeOrigin: true,
         

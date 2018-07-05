@@ -34,44 +34,51 @@
     </div>
     <!-- 购物车 -->
     <div class="col-sm-12 col-md-4">
-        <table class="table">
-            <thead class="thead-default">
-                <tr>
+        <div v-if="Baskets.length>0">
+            <table class="table">
+                <thead class="thead-default">
+                    <tr>
+                     <th>数量</th>
+                     <th>品种</th>
+                     <th>价格</th>
+                    </tr>
+               </thead>
+                <tbody v-for="item in Baskets" :key="item.name">
+                 <tr>
+                    <td>
+                        <button class="btn btn-sm" @click="delQuantity(item)">-</button>
+                        <span>{{item.quantity}}</span>
+                        <button class="btn btn-sm" @click="addQuantity(item)">+</button>
+                    </td>
+                    <td>
+                        {{item.name}}{{item.size}}
+                    </td>
+                    <td>
+                       {{item.price * item.quantity}}
+                    </td>
+                 </tr>
+                </tbody>
+           </table>
+            <p>总价：{{total +"RMB"}}</p>
+            <button class="btn btn-success btn-block">提交</button>
+        </div>
+        <div v-else>
+          {{BasketText}}
+        </div>
 
-                    <th>数量</th>
-                    <th>品种</th>
-                    <th>价格</th>
-                </tr>
 
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <button class="btn btn-sm">-</button>
-                        <span>1</span>
-                        <button class="btn btn-sm">+</button>
-                    </td>
-                    <td>
-                        榴莲9寸
-                    </td>
-                    <td>
-                        38
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p>总价：</p>
-        <button class="btn btn-success btn-block">提交</button>
+       
     </div>
 </div>
 </template>
 
 <script>
-    export default {
-        name: "Menu",
-        data(){
+export default {
+    name: "Menu",
+    data(){
       return{
-          Basket:[],
+          Baskets:[],
+          BasketText:"购物车没有任何商品",
         getMenuItems:{
           1: {
             'name': '榴莲pizza',
@@ -109,14 +116,60 @@
         }
       }
     },
+    computed:{
+        total(){
+           let totalCost = 0
+           for(let index in this.Baskets)
+           {
+               let indivItem = this.Baskets[index]
+               totalCost += indivItem.quantity * indivItem.price
+           }
+           return totalCost
+
+        }
+        
+    },
     methods:{
         addToBasket(item,option){
-            this.Basket.push({
+           let basket = {
                 name:item.name,
                 size:option.size,
                 price:option.price,
                 quantity:1
-            })
+            }
+
+            if(this.Baskets.length>0)
+            {
+                // 过滤
+                let result = this.Baskets.filter((basket)=>{
+                    return (basket.name === item.name && basket.price === option.price)
+                })
+
+                if (result != null&& result.length > 0)
+                {
+                    result[0].quantity++
+                }else{
+                    this.Baskets.push(basket)
+                }
+
+            }else{
+            this.Baskets.push(basket)
+            }
+          
+        },
+        delQuantity(item){
+           item.quantity--
+
+           if(item.quantity<=0)
+           {
+               this.removeFromBaskets(item)
+           }
+        },
+        addQuantity(item){
+            item.quantity++
+        },
+        removeFromBaskets(item){
+          this.Baskets.splice(this.Baskets.indexOf(item),1)
         }
     }
     }
